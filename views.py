@@ -13,23 +13,14 @@ async def post_handler(request):
     #     return web.json_response(data, status=200)
     if request.content_type != 'multipart/form-data':
         return web.Response(status=400, text='Используйте form/data для отправки изображения')
-    file = await request.multipart()
-    field = await file.next()
     img = await request.content.read()
-    # img_pillow = Image.frombytes('RGBA', (128,128), img)
-    img_pillow = Image.open(BytesIO(img))
-    db_img = await db_select(id=1)
-    await db_insert(img)
-    # if img_pillow.format != 'JPEG':
-    #     jpg_img = img_pillow.convert('RGB')
-    #     jpg_img.save('colors.jpg')
-    # else:
-    #     img_pillow.save('colors.jpg')
-    
-    # print(type(img_pillow))
-    # print(type(img))
-    return web.Response(text=str(db_img))
+    p_img = Image.open(BytesIO(img))
+    id_img = await db_insert(img)
+    r = {'image_id': id_img}
+    return web.json_response(r, status=204)
     
 async def get_handler(request):
-    id = request
-    return
+    id = int(request.path[1:])
+    db_img = await db_select(id)
+    img = Image.open(BytesIO(db_img))
+    return web.Response(text=id)

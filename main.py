@@ -10,12 +10,12 @@ routes = web.RouteTableDef()
 app = web.Application()
 
 @routes.get('/{id}')
-async def get(self):
-    return await get_handler(self.request)
+async def get(request):
+    return await get_handler(request)
 
 @routes.post('/')
-async def post(self):
-    return await post_handler(self.request)
+async def post(request):
+    return await post_handler(request)
 
 
 if __name__ == '__main__':

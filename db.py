@@ -21,7 +21,13 @@ async def db_insert(bytes_image):
         INSERT INTO images(image) VALUES($1);
     ''', bytes_image
     )
+    id_img = await conn.fetchval('''
+        SELECT count(*) FROM images;
+    '''
+    )
     await conn.close()
+    return id_img
+
 
 async def db_select(id):
     conn = await create_connection()
