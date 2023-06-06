@@ -1,7 +1,4 @@
 from aiohttp import web
-import os, sys
-from PIL import Image
-import json
 from settings import config, BASE_DIR
 from views import post_handler, get_handler
 
@@ -11,10 +8,12 @@ app = web.Application()
 
 @routes.get('/{id}')
 async def get(request):
+    """Обработка GET-запросов"""
     return await get_handler(request)
 
 @routes.post('/')
 async def post(request):
+    """Обработка POST-запросов"""
     return await post_handler(request)
 
 
