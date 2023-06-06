@@ -12,7 +12,7 @@ async def get(request):
     return await get_handler(request)
 
 @routes.post('/')
-async def post(request):
+async def post_q(request):
     """Обработка POST-запросов"""
     return await post_handler(request)
 
