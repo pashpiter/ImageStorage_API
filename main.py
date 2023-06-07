@@ -1,7 +1,7 @@
 from aiohttp import web
-from settings import config, BASE_DIR
-from views import post_handler, get_handler
 
+from settings import config
+from views import get_handler, post_handler
 
 routes = web.RouteTableDef()
 app = web.Application()

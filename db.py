@@ -1,4 +1,5 @@
 import asyncpg
+
 from settings import config
 
 
@@ -7,7 +8,7 @@ def create_connection() -> asyncpg.Connection:
     return asyncpg.connect(config['postgres']['database_url'])
 
 def db_create() -> None:
-    """Создание базы"""
+    """Создание базы (не используется)"""
     conn = create_connection()
     conn.execute('''
         CREATE TABLE IF NOT EXSIST images(
