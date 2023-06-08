@@ -37,13 +37,9 @@ python main.py
 ```
 POST http://{ip_server}:{port}/
 ```
-* Загрузка изображения на сервер c дополнительным параметром quality
+* Загрузка изображения на сервер c дополнительными параметрами
 ```
-POST http://{ip_server}:{port}/?quality={int}
-```
-* Загрузка изображения на сервер c дополнительными параметрами width и height
-```
-POST http://{ip_server}:{port}/?width={int}&height={int}
+POST http://{ip_server}:{port}/?x={int}&y={int}&quality={int}
 ```
 * Получение изображения по ID
 ```

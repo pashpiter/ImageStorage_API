@@ -1,10 +1,12 @@
 from aiohttp import web
 
 from settings import config
+from logger_app import get_logger
 from views import get_handler, post_handler
 
 routes = web.RouteTableDef()
 app = web.Application()
+logger = get_logger(__name__)
 
 @routes.get('/{id}')
 async def get(request):
@@ -12,7 +14,7 @@ async def get(request):
     return await get_handler(request)
 
 @routes.post('/')
-async def post_q(request):
+async def post(request):
     """Обработка POST-запросов"""
     return await post_handler(request)
 
@@ -20,4 +22,5 @@ async def post_q(request):
 if __name__ == '__main__':
     app.add_routes(routes)
     app['config'] = config
+    logger.warning('Start App')
     web.run_app(app)
