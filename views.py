@@ -56,3 +56,11 @@ async def post_handler(request: web.Request) -> web.json_response:
     id_img = await db_insert(output.getvalue())
     data = {'image_id': id_img}
     return web.json_response(data, status=201)
+
+async def get_logs(request):
+    """GET-запрос на получение логов"""
+    count = int(request.match_info['count'])
+    with open('logs.log', encoding='UTF-8') as f:
+        log = [line for line in f]
+    data = {f'last {count} logs': log[-count:]}
+    return web.json_response(data)
