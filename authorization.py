@@ -7,7 +7,8 @@ from settings import BASE_DIR
 allowed_tokens_path = BASE_DIR / 'config' / 'allowed_tokens.yaml'
 
 
-def get_token(username, password):
+async def create_token(username: str, password: str) -> web.json_response:
+    """Получение токена для пользователя"""
     key = 'secret'
     payload = {
         'username': username,
@@ -28,12 +29,12 @@ def get_token(username, password):
                     data={'erorr': 'Неверный пароль'}, status=403)
         else:
             yaml.dump({username: token}, f)
-            data = {'token': token}
         data = {'token': token}
     return web.json_response(data, status=201)
 
 
-def check_token(request):
+async def check_token(request: web.Request) -> bool:
+    """Проверка токена пользователя"""
     if not request.headers.get('Authorization'):
         return False
     scheme, token = request.headers['Authorization'].strip().split(' ')

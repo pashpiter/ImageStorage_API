@@ -61,9 +61,9 @@ async def post_handler(request: web.Request) -> web.json_response:
     return web.json_response(data, status=201)
 
 
-async def get_logs(request):
+async def get_logs(request: web.Request) -> web.json_response:
     """GET-запрос на получение логов"""
-    count = int(request.match_info['count'])
+    count = int(request.query.get('count', 10))
     with open('logs.log', encoding='UTF-8') as f:
         log = [line for line in f]
     data = {f'last {count} logs': log[-count:]}
