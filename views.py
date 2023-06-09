@@ -6,7 +6,9 @@ from PIL import Image
 from db import db_insert, db_select
 from logger_app import get_logger
 
+
 logger = get_logger(__name__)
+
 
 async def get_handler(request: web.Request) -> web.Response:
     """Обрабатываем GET-запросы"""
@@ -26,6 +28,7 @@ async def get_handler(request: web.Request) -> web.Response:
     bytes_img = BytesIO(db_bytes_img)
     return web.Response(
         body=bytes_img.getvalue(), content_type="image/jpeg")
+
 
 async def post_handler(request: web.Request) -> web.json_response:
     """Обрабатываем POST-запросы"""
@@ -56,6 +59,7 @@ async def post_handler(request: web.Request) -> web.json_response:
     id_img = await db_insert(output.getvalue())
     data = {'image_id': id_img}
     return web.json_response(data, status=201)
+
 
 async def get_logs(request):
     """GET-запрос на получение логов"""
