@@ -15,7 +15,7 @@ class CustomFilter(logging.Filter):
 def get_handler() -> logging.Handler:
     handler = logging.FileHandler('logs.log', mode='a', encoding='UTF-8')
     handler.setLevel(logging.INFO)
-    handler.setFormatter(logging.Formatter(_log_format, ))
+    handler.setFormatter(logging.Formatter(_log_format, "%Y-%m-%d %H:%M:%S"))
     return handler
 
 
