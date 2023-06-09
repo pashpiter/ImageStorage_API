@@ -33,6 +33,14 @@ python main.py
 ```
 
 ### Примеры команд API
+* Получение токена для пользователя
+```
+POST http://{ip_server}:{port}/auth/token
+{
+  "username": {str},
+  "password": {str}
+}
+```
 * Загрузка изображения на сервер
 ```
 POST http://{ip_server}:{port}/
@@ -44,6 +52,10 @@ POST http://{ip_server}:{port}/?x={int}&y={int}&quality={int}
 * Получение изображения по ID
 ```
 GET http://{ip_server}:{port}/{id}
+```
+* Получение последних записей логов с необязательным параметром count
+```
+GET http://{ip_server}:{port}/logs?count={int}
 ```
 
 #### Pavel Drovnin [@pashpiter](http://t.me/pashpiter)
