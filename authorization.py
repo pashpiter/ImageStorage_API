@@ -24,7 +24,7 @@ async def add_or_return_token(
         parsed_tokens and username not in parsed_tokens
     ) or not parsed_tokens:
         yaml.dump({username: token}, f)
-        logger.info(f'Добавление нового токена для {username}',
+        logger.info(f'Adding new token for {username}',
                     {'route': route})
         return web.json_response(data={'token': token}, status=201)
     else:
@@ -40,7 +40,7 @@ async def create_token(
         username: str, password: str, route: str
 ) -> Callable[[str, str, str, io.TextIOWrapper, str, str], web.json_response]:
     """Получение токена для пользователя"""
-    logger.info(f'Получен POST-запрос от {username}',
+    logger.info(f'Get POST-request from {username} for getting token',
                 {'route': route})
     key = 'secret'
     payload = {

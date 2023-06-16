@@ -20,13 +20,13 @@ async def create_connection() -> asyncpg.Connection:
             )
     ''')
     except Exception as e:
-        logger.error(f'Ошибка подклюения к базе:\n{e}')
+        logger.error(f'Connection to base with error:\n{e}')
     return conn
 
 
 async def db_insert(bytes_image: bytes) -> int:
     """Добавление изображения в базу"""
-    logger.info('Добавление изображения в базу')
+    logger.info('Adding image to db')
     try:
         conn = await create_connection()
         await conn.execute('''
@@ -37,9 +37,9 @@ async def db_insert(bytes_image: bytes) -> int:
         ''')
         await conn.close()
     except Exception as e:
-        logger.error(f'Добаление в базу закончилось с ошибкой:\n{e}')
+        logger.error(f'Adding to db ends with error:\n{e}')
     else:
-        logger.info('Добавление изображения успешно завершено')
+        logger.info('Successful addition of the image to db')
     return id_img
 
 
@@ -52,5 +52,5 @@ async def db_select(id: int) -> bytes:
         ''', id)
         await conn.close()
     except Exception as e:
-        logger.error(f'Получение изображения закончилось с ошибкой:\n{e}')
+        logger.error(f'Getting image ends with error:\n{e}')
     return img
