@@ -9,7 +9,7 @@ logger = get_logger(__name__)
 
 async def create_connection() -> asyncpg.Connection:
     """Настройка подключения к базе данных и создание таблицы"""
-    host, port, user, password, database = config['postgres'].values()
+    database, user, password, host, port = config.values()
     try:
         conn = await asyncpg.connect(host=host, port=port, user=user,
                                      password=password, database=database)
