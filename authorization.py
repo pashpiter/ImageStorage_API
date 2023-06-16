@@ -22,7 +22,7 @@ async def create_token(
         'password': password
     }
     token = jwt.encode(payload, key)
-    with open(allowed_tokens_path, 'r+') as f:
+    with open(allowed_tokens_path, 'w+') as f:
         parsed_tokens = yaml.safe_load(f)
         if (
             parsed_tokens and username not in parsed_tokens
