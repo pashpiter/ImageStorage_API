@@ -52,7 +52,7 @@ POST http://{ip_server}:{port}/auth/token
 ```
 curl -X POST "http://0.0.0.0:8080/auth/token" \
 -H "Content-Type: application/json" \
--d '{"username": "{username}", "password": "{password}"}'
+-d '{"username": "{str}", "password": "{str}"}'
 ```
 * Загрузка изображения на сервер
 ```
