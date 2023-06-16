@@ -49,21 +49,47 @@ POST http://{ip_server}:{port}/auth/token
   "password": {str}
 }
 ```
+```
+curl -X POST "http://0.0.0.0:8080/auth/token" \
+-H "Content-Type: application/json" \
+-d '{"username": "{username}", "password": "{password}"}'
+```
 * Загрузка изображения на сервер
 ```
 POST http://{ip_server}:{port}/
+```
+```
+curl -X POST "http://0.0.0.0:8080/" \
+-H "Content-Type: multipart/form-data" \
+-H "Authorization: Bearer {token}" \
+-F "data=@{filename}"
 ```
 * Загрузка изображения на сервер c дополнительными параметрами
 ```
 POST http://{ip_server}:{port}/?x={int}&y={int}&quality={int}
 ```
+```
+curl -X POST "http://0.0.0.0:8080/?x={int}&y={int}&quality={int}" \
+-H "Content-Type: multipart/form-data" \
+-H "Authorization: Bearer {token}" \
+-F "data=@{filename}"
+```
 * Получение изображения по ID
 ```
 GET http://{ip_server}:{port}/{id}
 ```
+```
+curl "http://0.0.0.0:8080/{id}" \
+-H "Authorization: Bearer {token}" \
+-o image_from_response.jpg
+```
 * Получение последних записей логов с необязательным параметром count
 ```
 GET http://{ip_server}:{port}/logs?count={int}
+```
+```
+curl "http://0.0.0.0:8080/logs?count={int}" \
+-H "Authorization: Bearer {token}"
 ```
 
 #### Pavel Drovnin [@pashpiter](http://t.me/pashpiter)
