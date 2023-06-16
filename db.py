@@ -7,9 +7,21 @@ from settings import config
 logger = get_logger(__name__)
 
 
-def create_connection() -> asyncpg.Connection:
-    """Настройка подключения к базе данных"""
-    return asyncpg.connect(config['postgres']['database_url'])
+async def create_connection() -> asyncpg.Connection:
+    """Настройка подключения к базе данных и создание таблицы"""
+    host, port, user, password, database = config['postgres'].values()
+    try:
+        conn = await asyncpg.connect(host=host, port=port, user=user,
+                                     password=password, database=database)
+        await conn.execute('''
+            CREATE TABLE IF NOT EXISTS images(
+                id serial PRIMARY KEY,
+                image BYTEA
+            )
+    ''')
+    except Exception as e:
+        logger.error(f'Ошибка подклюения к базе:\n{e}')
+    return conn
 
 
 async def db_insert(bytes_image: bytes) -> int:
