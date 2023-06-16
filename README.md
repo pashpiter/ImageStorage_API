@@ -1,7 +1,7 @@
 # ImageStorage_API
 
 
-##### Стек: Python, aiohttp, Postgresql, asyncpg, Pillow
+##### Стек: Python, aiohttp, Postgresql, asyncpg, Pillow, Docker
 ***
 
 ### Запуск проекта
@@ -10,6 +10,7 @@
 ```
 git clone https://github.com/pashpiter/ImageStorage_API
 ```
+* Перейти в папку ImageStorage_API
 * Установить и активировать виртуальное окружение
 ```
 python3 -m venv venv
@@ -22,10 +23,17 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 * Добавить в корень папку config и созадть файл config.yaml
-* Добавить в config.yaml параметры для Postgres
+* Добавить в config.yaml параметры
 ```
-postgres:
-  database_url: postgres://{user}:{password}@{ip_server}:{port}
+POSTGRES_DB: postgres
+POSTGRES_USER: {user}
+POSTGRES_PASSWORD: {password}
+POSTGRES_HOST: {ip_server}  # 0.0.0.0
+POSTGRES_PORT: {port}  # 5432
+```
+* Запустить docker-compose для создания контейнера postgres
+```
+sudo docker-compose up -d
 ```
 * Запустить локальный сервер
 ```
