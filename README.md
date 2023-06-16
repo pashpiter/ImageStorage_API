@@ -81,7 +81,7 @@ GET http://{ip_server}:{port}/{id}
 ```
 curl "http://0.0.0.0:8080/{id}" \
 -H "Authorization: Bearer {token}" \
--o image_from_response.jpg
+-o image_from_response.jpeg
 ```
 * Получение последних записей логов с необязательным параметром count
 ```
