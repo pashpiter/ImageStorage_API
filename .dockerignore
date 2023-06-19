@@ -1,0 +1,6 @@
+docker-compose.yml
+logs.log
+*/allowed_tokens.yaml
+.vscode
+venv
+__pycache__

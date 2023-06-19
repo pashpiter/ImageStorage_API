@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 services:
   postgres:
@@ -8,8 +8,28 @@ services:
     env_file:
       - config/config.yaml
     ports:
-      - '5432:5432'
+      - "5432:5432"
     container_name: postgres
+
+  imagestorage_app:
+    build: ./
+    depends_on:
+      - postgres
+    volumes:
+      - tokens_data:/config/
+    container_name: imagestorage_app
+    ports:
+      - "8080:8080"
   
+  nginx:
+    image: nginx:1.25.1-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - imagestorage_app
+
 volumes:
   postgres_data:
+  tokens_data:
