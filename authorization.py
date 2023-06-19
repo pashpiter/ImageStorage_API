@@ -66,6 +66,9 @@ async def check_token(request: web.Request) -> bool:
     scheme, token = request.headers['Authorization'].strip().split(' ')
     if scheme != 'Bearer':
         return web.Response(status=400, text='Неподходящая схема токена')
-    with open(allowed_tokens_path) as f:
-        allowed_tokens = yaml.safe_load(f)
-    return token in allowed_tokens.values() if allowed_tokens else False
+    try:
+        with open(allowed_tokens_path) as f:
+            allowed_tokens = yaml.safe_load(f)
+        return token in allowed_tokens.values() if allowed_tokens else False
+    except FileNotFoundError:
+        return False
