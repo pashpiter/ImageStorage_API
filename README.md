@@ -1,7 +1,7 @@
 # ImageStorage_API
 
 
-##### Стек: Python, aiohttp, Postgresql, asyncpg, Pillow, Docker
+##### Стек: Python, aiohttp, Postgresql, asyncpg, Pillow, Docker, nginx
 ***
 
 ### Запуск проекта
@@ -12,16 +12,16 @@ git clone https://github.com/pashpiter/ImageStorage_API
 ```
 * Перейти в папку ImageStorage_API
 
-* Добавить в корень папку config и созадть файл config.yaml
+* Добавить в корень папку config и создать файл config.yaml
 * Добавить в config.yaml параметры
 ```
 POSTGRES_DB: postgres
 POSTGRES_USER: {user}
 POSTGRES_PASSWORD: {password}
-POSTGRES_HOST: postgres  # Postgres container name
+POSTGRES_HOST: postgres
 POSTGRES_PORT: 5432
 ```
-* Запустить приложение используя docker-compose
+* Запустить проект используя docker-compose
 ```
 sudo docker-compose up -d
 ```
