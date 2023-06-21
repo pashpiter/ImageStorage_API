@@ -45,52 +45,52 @@ python main.py
 ### Примеры команд API
 * Получение токена для пользователя
 ```
-POST http://{ip_server}:{port}/auth/token
+POST http://localhost:8080/auth/token
 {
   "username": {str},
   "password": {str}
 }
 ```
 ```
-curl -X POST "http://0.0.0.0:8080/auth/token" \
+curl -X POST "http://localhost:8080/auth/token" \
 -H "Content-Type: application/json" \
 -d '{"username": "{str}", "password": "{str}"}'
 ```
 * Загрузка изображения на сервер
 ```
-POST http://{ip_server}:{port}/
+POST http://localhost:8080/
 ```
 ```
-curl -X POST "http://0.0.0.0:8080/" \
+curl -X POST "http://localhost:8080/" \
 -H "Content-Type: multipart/form-data" \
 -H "Authorization: Bearer {token}" \
 -F "data=@{filename}"
 ```
 * Загрузка изображения на сервер c дополнительными параметрами
 ```
-POST http://{ip_server}:{port}/?x={int}&y={int}&quality={int}
+POST http://localhost:8080/?x={int}&y={int}&quality={int}
 ```
 ```
-curl -X POST "http://0.0.0.0:8080/?x={int}&y={int}&quality={int}" \
+curl -X POST "http://localhost:8080/?x={int}&y={int}&quality={int}" \
 -H "Content-Type: multipart/form-data" \
 -H "Authorization: Bearer {token}" \
 -F "data=@{filename}"
 ```
 * Получение изображения по ID
 ```
-GET http://{ip_server}:{port}/{id}
+GET http://localhost:8080/{id}
 ```
 ```
-curl "http://0.0.0.0:8080/{id}" \
+curl "http://localhost:8080/{id}" \
 -H "Authorization: Bearer {token}" \
 -o image_from_response.jpeg
 ```
 * Получение последних записей логов с необязательным параметром count
 ```
-GET http://{ip_server}:{port}/logs?count={int}
+GET http://localhost:8080/logs?count={int}
 ```
 ```
-curl "http://0.0.0.0:8080/logs?count={int}" \
+curl "http://localhost:8080/logs?count={int}" \
 -H "Authorization: Bearer {token}"
 ```
 
