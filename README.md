@@ -5,7 +5,9 @@
 ***
 
 ### Запуск проекта
-Для запуска проекта необходимо: 
+_Есть вторая ветка deploy с запуском проекта через docker-compose_
+
+Для запуска проекта в ветке main необходимо: 
 * Клонировать репозиторий
 ```
 git clone https://github.com/pashpiter/ImageStorage_API
@@ -29,7 +31,7 @@ POSTGRES_DB: postgres
 POSTGRES_USER: {user}
 POSTGRES_PASSWORD: {password}
 POSTGRES_HOST: {ip_server}  # 0.0.0.0
-POSTGRES_PORT: {port}  # 5432
+POSTGRES_PORT: 5432
 ```
 * Запустить docker-compose для создания контейнера postgres
 ```
