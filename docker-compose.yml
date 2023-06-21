@@ -16,7 +16,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - tokens_data:/config/
+      - config_data:/app/config/
     container_name: imagestorage_app
     ports:
       - "8080:8080"
@@ -32,4 +32,4 @@ services:
 
 volumes:
   postgres_data:
-  tokens_data:
+  config_data:
