@@ -5,7 +5,9 @@
 ***
 
 ### Запуск проекта
-Для запуска проекта необходимо: 
+_Есть вторая ветка deploy с запуском проекта через docker-compose_
+
+Для запуска проекта в ветке main необходимо: 
 * Клонировать репозиторий
 ```
 git clone https://github.com/pashpiter/ImageStorage_API
@@ -38,7 +40,7 @@ POST http://localhost/auth/token
 ```
 curl -X POST "http://localhost/auth/token" \
 -H "Content-Type: application/json" \
--d '{"username": "{username}", "password": "{password}"}'
+-d '{"username": "{str}", "password": "{str}"}'
 ```
 * Загрузка изображения на сервер
 ```
