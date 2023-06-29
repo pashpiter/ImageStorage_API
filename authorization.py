@@ -27,13 +27,12 @@ async def add_or_return_token(
         logger.info(f'Adding new token for {username}',
                     {'route': route})
         return web.json_response(data={'token': token}, status=201)
-    else:
-        if jwt.decode(
-            parsed_tokens[username], key, algorithms="HS256"
-        )['password'] != password:
-            return web.json_response(
-                data={'error': 'Неверный пароль'}, status=403)
-        return web.json_response(data={'token': token}, status=200)
+    if jwt.decode(
+        parsed_tokens[username], key, algorithms="HS256"
+    )['password'] != password:
+        return web.json_response(
+            data={'error': 'Неверный пароль'}, status=403)
+    return web.json_response(data={'token': token}, status=200)
 
 
 async def create_token(
@@ -62,7 +61,7 @@ async def check_token(request: web.Request) -> bool:
     """Проверка токена пользователя"""
     if not request.headers.get('Authorization'):
         return False
-    logger.debug('Проверка токена', {'route': request.host+request.path})
+    logger.debug('Проверка токена', {'route': request.host + request.path})
     scheme, token = request.headers['Authorization'].strip().split(' ')
     if scheme != 'Bearer':
         return web.Response(status=400, text='Неподходящая схема токена')

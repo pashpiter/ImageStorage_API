@@ -16,7 +16,7 @@ async def get_handler(request: web.Request) -> tuple[web.Response,
     id = int(request.match_info['id'])
     logger.info(
         f'GET-request ID={id}',
-        {'route': request.host+request.path}
+        {'route': request.host + request.path}
     )
     if id < 1:
         return web.json_response(
@@ -26,7 +26,7 @@ async def get_handler(request: web.Request) -> tuple[web.Response,
     if not db_bytes_img:
         logger.error(
             f'No image with ID={id}',
-            {'route': request.host+request.path}
+            {'route': request.host + request.path}
         )
         return web.json_response(
             status=404,
@@ -38,11 +38,11 @@ async def get_handler(request: web.Request) -> tuple[web.Response,
 
 async def post_handler(request: web.Request) -> web.json_response:
     """Обрабатываем POST-запросы"""
-    logger.info('Get POST-request', {'route': request.host+request.path})
+    logger.info('Get POST-request', {'route': request.host + request.path})
     if request.content_type != 'multipart/form-data':
         logger.error(
             'Incorrect content',
-            {'route': request.host+request.path}
+            {'route': request.host + request.path}
         )
         return web.json_response(
             status=400,

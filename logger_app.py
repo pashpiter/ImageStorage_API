@@ -1,8 +1,8 @@
 import logging
 
 
-_log_format = '%(asctime)s,%(msecs)d: %(route)s: %(functionName)s: '\
-              '%(levelname)s: %(message)s'
+_log_format = ('%(asctime)s,%(msecs)d: %(route)s: %(functionName)s: '
+               '%(levelname)s: %(message)s')
 
 
 class CustomFilter(logging.Filter):
