@@ -6,16 +6,14 @@ _log_format = ('%(asctime)s,%(msecs)d: %(route)s: %(functionName)s: '
 
 
 class CustomFilter(logging.Filter):
-    def filter(self, record: logging.LogRecord) -> None:
+    def filter(self, record: logging.LogRecord) -> bool:
         """Добавление произвольного поля в вывод логов"""
         record.route = record.args.get('route', None) if record.args else None
         record.functionName = record.funcName
         return True
 
 
-def set_level_and_formatter(
-        handler: tuple[logging.FileHandler, logging.StreamHandler]
-) -> None:
+def set_level_and_formatter(handler: logging.Handler) -> None:
     """Установка уровня уведомлений и форматтера для обработчика"""
     handler.setLevel(logging.INFO)
     handler.setFormatter(logging.Formatter(_log_format, "%Y-%m-%d %H:%M:%S"))

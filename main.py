@@ -1,5 +1,3 @@
-from typing import Callable
-
 from aiohttp import web
 
 from authorization import check_token, create_token
@@ -13,10 +11,7 @@ logger = get_logger(__name__)
 
 
 @routes.get('/logs')
-async def logs(
-        request: web.Request
-) -> tuple[web.json_response,
-           Callable[[web.Request], web.json_response]]:
+async def logs(request: web.Request) -> web.Response:
     """Обработка запроса на получения логов"""
     if not await check_token(request):
         return web.json_response({'error': 'Unauthorized'}, status=401)
@@ -24,11 +19,7 @@ async def logs(
 
 
 @routes.get('/{id}')
-async def get(
-        request: web.Request
-) -> tuple[web.json_response, Callable[[web.Request],
-                                       tuple[web.Response,
-                                       web.json_response]]]:
+async def get(request: web.Request) -> web.Response:
     """Обработка GET-запросов c ID изображения"""
     if not await check_token(request):
         return web.json_response({'error': 'Unauthorized'}, status=401)
@@ -36,10 +27,7 @@ async def get(
 
 
 @routes.post('/')
-async def post(
-        request: web.Request
-) -> tuple[web.json_response,
-           Callable[[web.Request], web.json_response]]:
+async def post(request: web.Request) -> web.Response:
     """Обработка POST-запросов"""
     if not await check_token(request):
         return web.json_response({'error': 'Unauthorized'}, status=401)
@@ -47,9 +35,7 @@ async def post(
 
 
 @routes.post('/auth/token')
-async def auth_get_token(
-        request: web.Request
-) -> tuple[web.Response, Callable[[str, str], web.json_response]]:
+async def auth_get_token(request: web.Request) -> web.Response:
     _json_dict = await request.json()
     username, password = _json_dict.get('username'), _json_dict.get('password')
     if not username or not password:

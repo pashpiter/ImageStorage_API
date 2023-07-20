@@ -1,5 +1,5 @@
 import io
-from typing import Callable
+from typing import Union
 
 import jwt
 import yaml
@@ -16,7 +16,7 @@ logger = get_logger(__name__)
 async def add_or_return_token(
         username: str, token: str, password: str,
         f: io.TextIOWrapper, route: str, key: str
-) -> web.json_response:
+) -> web.Response:
     """Добавляет токен для пользователя в разрешенные или
     возвращает токен ддля пользователя созданный до этого"""
     parsed_tokens = yaml.safe_load(f)
@@ -37,7 +37,7 @@ async def add_or_return_token(
 
 async def create_token(
         username: str, password: str, route: str
-) -> Callable[[str, str, str, io.TextIOWrapper, str, str], web.json_response]:
+) -> web.Response:
     """Получение токена для пользователя"""
     logger.info(f'Get POST-request from {username} for getting token',
                 {'route': route})
@@ -57,7 +57,7 @@ async def create_token(
                                              f, route, key)
 
 
-async def check_token(request: web.Request) -> bool:
+async def check_token(request: web.Request) -> Union[bool, web.Response]:
     """Проверка токена пользователя"""
     if not request.headers.get('Authorization'):
         return False

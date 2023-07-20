@@ -10,8 +10,7 @@ from logger_app import get_logger
 logger = get_logger(__name__)
 
 
-async def get_handler(request: web.Request) -> tuple[web.Response,
-                                                     web.json_response]:
+async def get_handler(request: web.Request) -> web.Response:
     """Обрабатываем GET-запросы"""
     id = int(request.match_info['id'])
     logger.info(
@@ -36,7 +35,7 @@ async def get_handler(request: web.Request) -> tuple[web.Response,
         body=bytes_img.getvalue(), content_type="image/jpeg")
 
 
-async def post_handler(request: web.Request) -> web.json_response:
+async def post_handler(request: web.Request) -> web.Response:
     """Обрабатываем POST-запросы"""
     logger.info('Get POST-request', {'route': request.host + request.path})
     if request.content_type != 'multipart/form-data':
@@ -68,7 +67,7 @@ async def post_handler(request: web.Request) -> web.json_response:
     return web.json_response(data={'image_id': id_img}, status=201)
 
 
-async def get_logs(request: web.Request) -> web.json_response:
+async def get_logs(request: web.Request) -> web.Response:
     """GET-запрос на получение логов"""
     count = int(request.query.get('count', 10))
     with open('logs.log', encoding='UTF-8') as f:
